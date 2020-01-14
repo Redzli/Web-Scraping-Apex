@@ -2,13 +2,11 @@ import config
 import sys
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
 import time
-import os
+# import selenium.webdriver.support.ui.WebDriverWait
 
 url = "https://ping.apex.sh/login"
-header = { 
+header = {
     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
     "Referer": "https://ping.apex.sh/login"
 }
