@@ -1,6 +1,8 @@
 sudo: required
 language: python
 node_js: stable
+services:
+  - docker
 addons:
   firefox: latest-nightly
 
@@ -25,7 +27,7 @@ install:
 #   - npm install
 script:
   - pre-commit run --all-files
-  - docker build -t python-scrape .
+  - sudo docker build -t python-scrape .
 
 before_deploy:
   - ibmcloud cr region-set us-south
