@@ -3,13 +3,8 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import time
-# import selenium.webdriver.support.ui.WebDriverWait
 
 url = "https://ping.apex.sh/login"
-header = {
-    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36",
-    "Referer": "https://ping.apex.sh/login"
-}
 
 options = Options()
 options.headless = True
@@ -17,7 +12,7 @@ driver = webdriver.Firefox(options=options)
 
 driver.get(url)
 
-driver.find_element_by_xpath("//div[@id = 'root']//button[@class = '_normal_ys497_4 _rounded_1uofz_15 ']").click()
+driver.find_element_by_xpath("//*[@id='root']/div/div/div/div[2]/button[1]").click()
 
 username = driver.find_element_by_id('login_field')
 username.send_keys(config.github_account)
@@ -26,6 +21,8 @@ password = driver.find_element_by_id('password')
 password.send_keys(config.github_password)
 
 driver.find_element_by_name('commit').click()
+
+time.sleep(10)
 
 driver.get("https://ping.apex.sh/ibm_cognitive_class/")
 
