@@ -1,0 +1,4 @@
+bandit==1.5.1
+pre-commit==1.18.3
+safety==1.8.4
+yamllint==1.14.0

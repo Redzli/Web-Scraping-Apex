@@ -1,0 +1,27 @@
+sudo: required
+language: python
+node_js: stable
+services:
+  - docker
+addons:
+  firefox: latest-nightly
+
+install:
+  - pip install -r requirements.travis.txt
+  - curl -sL https://ibm.biz/idt-installer | bash
+
+script:
+  - pre-commit run --all-files
+  - sudo docker build -t us.icr.io/skills-network-portals/portal-uptime-monitor-setup:${TRAVIS_TAG:-ci} .
+
+before_deploy:
+  - ibmcloud login -r us-south --apikey "${IBM_CLOUD_API_KEY:?}" # pragma: allowlist secret
+  - ibmcloud cr region-set us-south
+  - ibmcloud cr login
+
+deploy:
+  - provider: script
+    script: docker push us.icr.io/skills-network-portals/portal-uptime-monitor-setup:${TRAVIS_TAG:-ci}
+    skip_cleanup: true
+    on:
+      tags: true
